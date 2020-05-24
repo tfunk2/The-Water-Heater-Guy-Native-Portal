@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 25
   },
   list: {
       width: '100%',
+      minWidth: '100%',
       flex: 1
   }
 });
