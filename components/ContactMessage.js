@@ -44,10 +44,17 @@ export default function ContactMessage (props) {
 
 const styles = StyleSheet.create({
     outerContainer: {
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 8,
+        marginBottom: 8,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 2},
+        shadowRadius: 6,
+        shadowOpacity: 0.26,
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10
     },
     innerText: {
         fontSize: 20
