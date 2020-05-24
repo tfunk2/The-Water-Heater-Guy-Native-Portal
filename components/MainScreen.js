@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Button } from 'react-native'
 import ContactMessageScreen from './ContactMessageScreen'
+import TestimonialScreen from './TestimonialScreen'
 
 export default function MainScreen (props) {
 
@@ -19,6 +20,7 @@ export default function MainScreen (props) {
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>The Water Heater Guy Portal</Text>
              </View>
+            <View><Button title="TESTIMONIALS" onPress={() => {setActiveTab("testimonials")}} /></View>
             {displayActiveScreen}
         </View>
     )
