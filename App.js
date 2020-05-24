@@ -1,35 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
-import ContactMessage from './components/ContactMessage'
+import ContactMessageScreen from './components/ContactMessageScreen'
 
-export default class App extends Component {
+export default function App() {
 
-  state = {
-    contactMessages: []
+  const [activeScreen, setActiveScreen] = useState("login-screen")
+
+  let displayActiveScreen
+  if (activeScreen === "login-screen") {
+    displayActiveScreen = <View><Button title="LOG IN" onPress={() => {setActiveScreen("contact-messages")}} /></View>
+  } else if (activeScreen === "contact-messages") {
+    displayActiveScreen = <ContactMessageScreen />
+  } else if (activeScreen === "testimonials") {
+    displayActiveScreen = <View><Text>Reviews will go here</Text></View>
   }
+  
 
-  UNSAFE_componentWillMount() {
-    this.fetchData()
-  }
-
-  fetchData = async () => {
-    const response = await fetch('http://localhost:3000/contact_messages')
-    const json = await response.json()
-    this.setState({ contactMessages: json })
-  }
-
-  render () {
-    return (
-      <View style={styles.container}>
-        <Text>The Water Heater Guy Portal Native App</Text>
-        <FlatList 
-          data={this.state.contactMessages} 
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => <ContactMessage key={item.id} item={item} />} 
-        />
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>The Water Heater Guy Portal</Text>
       </View>
-    );
-  }
+      {displayActiveScreen}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -40,4 +34,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 25
   },
+  header: {
+    width: '100%',
+    height: 70,
+    backgroundColor: 'rgba(0, 55, 255, 0.918)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerTitle: {
+    color: 'white',
+    fontSize: 18
+  }
 });

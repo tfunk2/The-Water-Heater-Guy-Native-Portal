@@ -1,5 +1,12 @@
 import React from 'react'
-import { Text, Button, View, Stylesheet } from 'react-native'
+import { 
+    Text, 
+    Button, 
+    Alert, 
+    View, 
+    StyleSheet, 
+    TouchableOpacity 
+} from 'react-native'
 
 export default function ContactMessage (props) {
 
@@ -24,13 +31,25 @@ export default function ContactMessage (props) {
     }
 
     return (
-        <View>
-            <Text>{changeTimeFormat()}</Text>
-            <Text>{props.item.full_name}</Text>
-            <Text>{props.item.address}</Text>
-            <Text>{props.item.email}</Text>
-            <Text>{props.item.phone_number}</Text>
-            <Text>{props.item.message}</Text>
+        <View style={styles.outerContainer}>
+            <Text style={styles.innerText}>{changeTimeFormat()}</Text>
+            <Text style={styles.innerText}>{props.item.full_name}</Text>
+            <Text style={styles.innerText}>{props.item.address}</Text>
+            <Text style={styles.innerText}>{props.item.email}</Text>
+            <Text style={styles.innerText}>{props.item.phone_number}</Text>
+            <Text style={styles.innerText}>{props.item.message}</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    outerContainer: {
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10
+    },
+    innerText: {
+        fontSize: 20
+    }
+})
