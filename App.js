@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
-import ContactMessageScreen from './components/ContactMessageScreen'
+import MainScreen from './components/MainScreen'
 
 export default function App() {
 
@@ -8,19 +8,14 @@ export default function App() {
 
   let displayActiveScreen
   if (activeScreen === "login-screen") {
-    displayActiveScreen = <View><Button title="LOG IN" onPress={() => {setActiveScreen("contact-messages")}} /></View>
-  } else if (activeScreen === "contact-messages") {
-    displayActiveScreen = <ContactMessageScreen />
-  } else if (activeScreen === "testimonials") {
-    displayActiveScreen = <View><Text>Reviews will go here</Text></View>
-  }
+    displayActiveScreen = <View><Button title="LOG IN" onPress={() => {setActiveScreen("main-screen")}} /></View>
+  } else if (activeScreen === "main-screen") {
+    displayActiveScreen = <MainScreen />
+  } 
   
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>The Water Heater Guy Portal</Text>
-      </View>
       {displayActiveScreen}
     </View>
   );
@@ -31,18 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 25
-  },
-  header: {
-    width: '100%',
-    height: 70,
-    backgroundColor: 'rgba(0, 55, 255, 0.918)',
-    alignItems: 'center',
     justifyContent: 'center'
   },
-  headerTitle: {
-    color: 'white',
-    fontSize: 18
-  }
 });
