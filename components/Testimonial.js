@@ -35,6 +35,7 @@ export default function Testimonial (props) {
             <Text style={styles.innerText}>{changeTimeFormat()}</Text>
             <Text style={styles.innerText}>{props.item.name}</Text>
             <Text style={styles.innerText}>{props.item.message}</Text>
+            <Button title="Delete" onPress={() => props.deleteMessage(props.item.id)}/>
         </View>
     )
 }

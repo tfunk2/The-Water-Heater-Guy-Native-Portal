@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, Image } from 'react-native'
 import ContactMessageScreen from './ContactMessageScreen'
 import TestimonialScreen from './TestimonialScreen'
 import BottomNavbar from './BottomNavbar'
@@ -11,7 +11,7 @@ export default function MainScreen (props) {
     let displayActiveScreen
 
     if (activeTab === "contact-messages") {
-    displayActiveScreen = <ContactMessageScreen />
+    displayActiveScreen = <ContactMessageScreen changeActiveTab={changeActiveTab}/>
     } else if (activeTab === "testimonials") {
     displayActiveScreen = <TestimonialScreen />
     }
@@ -24,7 +24,11 @@ export default function MainScreen (props) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>The Water Heater Guy Portal</Text>
+                <Image 
+                    style={styles.image} 
+                    source={require('../images/Water-Heater-Guy-Logo.png')}
+                    resizeMode="contain"
+                />
             </View>
             {displayActiveScreen}
             <BottomNavbar changeActiveTab={changeActiveTab} />
@@ -41,14 +45,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     header: {
+        paddingTop: 12,
+        paddingBottom: 2,
         width: '100%',
-        height: 80,
-        backgroundColor: 'rgba(0, 55, 255, 0.918)',
+        height: 100,
+        backgroundColor: 'rgba(214, 214, 214, 0.8)',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    headerTitle: {
-        color: 'white',
-        fontSize: 18
+    image: {
+        width: '100%',
+        maxHeight: 80,
+        overflow: 'visible'
     }
 })

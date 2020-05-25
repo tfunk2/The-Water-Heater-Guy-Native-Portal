@@ -18,6 +18,16 @@ export default class TestimonialScreen extends Component {
     this.setState({ testimonials: json.reverse() })
   }
 
+  deleteMessage = async (selectedMessageId) => {
+    const response = await fetch(`http://localhost:3000/testimonials/${selectedMessageId}`, {
+        method: "DELETE"
+    })
+    const newMessages = this.state.testimonials.filter(message => {
+        message.id !== selectedMessageId
+    })
+    this.setState({ testimonials: newMessages })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -25,7 +35,7 @@ export default class TestimonialScreen extends Component {
             style={styles.list}
             data={this.state.testimonials} 
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <Testimonial key={item.id} item={item} />} 
+            renderItem={({ item }) => <Testimonial deleteMessage={this.deleteMessage} key={item.id} item={item} />} 
         />
       </View>
     );

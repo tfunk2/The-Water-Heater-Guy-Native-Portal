@@ -38,6 +38,7 @@ export default function ContactMessage (props) {
             <Text style={styles.innerText}>{props.item.email}</Text>
             <Text style={styles.innerText}>{props.item.phone_number}</Text>
             <Text style={styles.innerText}>{props.item.message}</Text>
+            <Button title="Delete" onPress={() => props.deleteMessage(props.item.id)}/>
         </View>
     )
 }
