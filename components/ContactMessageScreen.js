@@ -22,10 +22,7 @@ export default class ContactMessageScreen extends Component {
     const response = await fetch(`http://localhost:3000/contact_messages/${selectedMessageId}`, {
         method: "DELETE"
     })
-    const newMessages = this.state.contactMessages.filter(message => {
-        message.id !== selectedMessageId
-    })
-    this.setState({ contactMessages: newMessages })
+    this.fetchData()
   }
 
   render () {

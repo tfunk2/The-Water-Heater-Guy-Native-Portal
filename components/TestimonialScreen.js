@@ -22,10 +22,7 @@ export default class TestimonialScreen extends Component {
     const response = await fetch(`http://localhost:3000/testimonials/${selectedMessageId}`, {
         method: "DELETE"
     })
-    const newMessages = this.state.testimonials.filter(message => {
-        message.id !== selectedMessageId
-    })
-    this.setState({ testimonials: newMessages })
+    this.fetchData()
   }
 
   render () {
