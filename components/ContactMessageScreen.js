@@ -18,6 +18,16 @@ export default class ContactMessageScreen extends Component {
     this.setState({ contactMessages: json.reverse() })
   }
 
+  deleteMessage = async (selectedMessageId) => {
+    const response = await fetch(`http://localhost:3000/contact_messages/${selectedMessageId}`, {
+        method: "DELETE"
+    })
+    const newMessages = this.state.contactMessages.filter(message => {
+        message.id !== selectedMessageId
+    })
+    this.setState({ contactMessages: newMessages })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -25,7 +35,7 @@ export default class ContactMessageScreen extends Component {
             style={styles.list}
             data={this.state.contactMessages} 
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <ContactMessage key={item.id} item={item} />} 
+            renderItem={({ item }) => <ContactMessage deleteMessage={this.deleteMessage} key={item.id} item={item} />} 
         />
       </View>
     );
