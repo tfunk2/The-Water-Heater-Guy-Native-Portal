@@ -15,19 +15,22 @@ export default class ContactMessageScreen extends Component {
 
   fetchData = async () => {
     const token2 = await SecureStore.getItemAsync('secure_token')
-    const response = await fetch('http://localhost:3000/contact_messages', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token2}`
-      }
-    })
-    const json = await response.json()
-    this.setState({ contactMessages: json.reverse() })
+    if (token2 === this.props.token) {
+      const response = await fetch('http://localhost:3000/contact_messages', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token2}`
+        }
+      })
+      const json = await response.json()
+      this.setState({ contactMessages: json.reverse() })
+    }
   }
 
   deleteMessage = async (selectedMessageId) => {
     const token2 = await SecureStore.getItemAsync('secure_token')
-    const response = await fetch(`http://localhost:3000/contact_messages/${selectedMessageId}`, {
+    if (token2 === this.props.token) {
+      const response = await fetch(`http://localhost:3000/contact_messages/${selectedMessageId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +38,7 @@ export default class ContactMessageScreen extends Component {
         }
     })
     this.fetchData()
+    }
   }
 
   render () {

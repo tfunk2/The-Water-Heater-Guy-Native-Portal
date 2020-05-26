@@ -15,26 +15,31 @@ export default class TestimonialScreen extends Component {
 
   fetchData = async () => {
     const token2 = await SecureStore.getItemAsync('secure_token')
-    const response = await fetch('http://localhost:3000/testimonials', {
-      "headers": {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token2}`
-      }
-    })
-    const json = await response.json()
-    this.setState({ testimonials: json.reverse() })
+    if (token2 === this.props.token) {
+      const response = await fetch('http://localhost:3000/testimonials', {
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token2}`
+        }
+      })
+      const json = await response.json()
+      this.setState({ testimonials: json.reverse() })
+    }
   }
 
   deleteMessage = async (selectedMessageId) => {
     const token2 = await SecureStore.getItemAsync('secure_token')
-    const response = await fetch(`http://localhost:3000/testimonials/${selectedMessageId}`, {
+    if (token2 === this.props.token) {
+      const response = await fetch(`http://localhost:3000/testimonials/${selectedMessageId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token2}`
         }
-    })
-    this.fetchData()
+      })
+      this.fetchData()
+    }
+    
   }
 
   render () {

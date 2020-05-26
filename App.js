@@ -6,12 +6,14 @@ import LoginScreen from './components/LoginScreen'
 export default function App() {
 
   const [activeScreen, setActiveScreen] = useState("login-screen")
+  const [token, setToken] = useState(null)
+
 
   let displayActiveScreen
   if (activeScreen === "login-screen") {
-    displayActiveScreen = <LoginScreen setActiveScreen={setActiveScreen}/>
+    displayActiveScreen = <LoginScreen setToken={setToken} setActiveScreen={setActiveScreen}/>
   } else if (activeScreen === "main-screen") {
-    displayActiveScreen = <MainScreen />
+    displayActiveScreen = <MainScreen token={token}/>
   } 
   
 

@@ -11,9 +11,9 @@ export default function MainScreen (props) {
     let displayActiveScreen
 
     if (activeTab === "contact-messages") {
-    displayActiveScreen = <ContactMessageScreen changeActiveTab={changeActiveTab}/>
+    displayActiveScreen = <ContactMessageScreen token={props.token} changeActiveTab={changeActiveTab}/>
     } else if (activeTab === "testimonials") {
-    displayActiveScreen = <TestimonialScreen />
+    displayActiveScreen = <TestimonialScreen token={props.token} />
     }
 
     const changeActiveTab = (tabSelected) => {

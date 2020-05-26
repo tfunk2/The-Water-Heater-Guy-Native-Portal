@@ -6,7 +6,6 @@ export default function LoginScreen (props) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [token, setToken] = useState(null)
 
     const handleUsernameTextChange = (input) => {
             setUsername(input)
@@ -34,15 +33,14 @@ export default function LoginScreen (props) {
             })
         })
         const json = await response.json()
-        const token = json.token
-        await setToken(token)
-        await SecureStore.setItemAsync('secure_token', token)
+        const token1 = json.token
+        await props.setToken(token1)
+        await SecureStore.setItemAsync('secure_token', token1)
         const token2 = await SecureStore.getItemAsync('secure_token')
 
-        if (token2) {
+        if (token2 === token1) {
             props.setActiveScreen("main-screen")
         }
-        
       }
 
     return (
