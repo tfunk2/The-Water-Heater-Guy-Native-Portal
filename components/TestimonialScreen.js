@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import * as SecureStore from 'expo-secure-store'
 import Testimonial from './Testimonial'
 
 export default class TestimonialScreen extends Component {
@@ -13,14 +14,25 @@ export default class TestimonialScreen extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('http://localhost:3000/testimonials')
+    const token2 = await SecureStore.getItemAsync('secure_token')
+    const response = await fetch('http://localhost:3000/testimonials', {
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token2}`
+      }
+    })
     const json = await response.json()
     this.setState({ testimonials: json.reverse() })
   }
 
   deleteMessage = async (selectedMessageId) => {
+    const token2 = await SecureStore.getItemAsync('secure_token')
     const response = await fetch(`http://localhost:3000/testimonials/${selectedMessageId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token2}`
+        }
     })
     this.fetchData()
   }
