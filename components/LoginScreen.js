@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import * as SecureStore from 'expo-secure-store'
 import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 export default function LoginScreen (props) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [token, setToken] = useState(null)
 
     const handleUsernameTextChange = (input) => {
             setUsername(input)
@@ -32,7 +34,15 @@ export default function LoginScreen (props) {
             })
         })
         const json = await response.json()
-        console.log(json.token)
+        const token = json.token
+        await setToken(token)
+        await SecureStore.setItemAsync('secure_token', token)
+        const token2 = await SecureStore.getItemAsync('secure_token')
+
+        if (token2) {
+            props.setActiveScreen("main-screen")
+        }
+        
       }
 
     return (
