@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import MainScreen from './components/MainScreen'
+import LoginScreen from './components/LoginScreen'
 
 export default function App() {
 
@@ -8,7 +9,7 @@ export default function App() {
 
   let displayActiveScreen
   if (activeScreen === "login-screen") {
-    displayActiveScreen = <View><Button title="LOG IN" onPress={() => {setActiveScreen("main-screen")}} /></View>
+    displayActiveScreen = <LoginScreen setActiveScreen={setActiveScreen}/>
   } else if (activeScreen === "main-screen") {
     displayActiveScreen = <MainScreen />
   } 
