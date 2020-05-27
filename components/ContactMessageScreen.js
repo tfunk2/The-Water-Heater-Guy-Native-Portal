@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import * as SecureStore from 'expo-secure-store'
 import ContactMessage from './ContactMessage'
 
@@ -48,7 +48,9 @@ export default class ContactMessageScreen extends Component {
             style={styles.list}
             data={this.state.contactMessages} 
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <ContactMessage deleteMessage={this.deleteMessage} key={item.id} item={item} />} 
+            renderItem={({ item }) => <ContactMessage fetchData={this.fetchData} token={this.props.token} deleteMessage={this.deleteMessage} key={item.id} item={item} />}
+            onRefresh={this.fetchData}
+            refreshing={false}
         />
       </View>
     );

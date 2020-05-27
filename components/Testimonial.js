@@ -8,6 +8,9 @@ import {
     TouchableOpacity 
 } from 'react-native'
 
+import * as SecureStore from 'expo-secure-store'
+
+
 export default function Testimonial (props) {
 
     const [messageExpanded, setMessageExpanded] = useState(false)
@@ -38,6 +41,30 @@ export default function Testimonial (props) {
         } else {
             setMessageExpanded(true)
         }
+
+        if (props.item.opened_status === "unopened") {
+            updateOpened()
+        }
+    }
+
+    const updateOpened = async () => {
+        const token2 = await SecureStore.getItemAsync('secure_token')
+        if (token2 === props.token) {
+            const response = await fetch(`http://localhost:3000/testimonials/${props.item.id}`, {
+                method: "PATCH",
+                headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token2}`
+                },
+                body: JSON.stringify({
+                    opened_status: "opened"
+                })
+            })
+            const json = await response.json()
+            if (json) {
+                props.fetchData()
+            }
+        }
     }
 
     let expandContent;
@@ -66,6 +93,8 @@ export default function Testimonial (props) {
             </View>
             <View style={styles.innerRightContainer}>
                 {
+                    props.item.opened_status === "unopened" ? 
+                    <Text>New</Text> :
                     messageExpanded === true ? 
                     <Text style={styles.arrow}>&and;</Text> : 
                     <Text style={styles.arrow}>&or;</Text> 

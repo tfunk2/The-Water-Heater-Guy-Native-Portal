@@ -83,11 +83,12 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         marginVertical: 10,
         width: '50%',
-        backgroundColor: 'rgba(214, 214, 214, 0.8)'
+        backgroundColor: 'rgba(214, 214, 214, 0.8)',
+        borderRadius: 6
     },
     loginView: {
         flex: 1,
-        width: '100%',
+        width: 400,
         justifyContent: 'center',
         alignItems: 'center'
     },

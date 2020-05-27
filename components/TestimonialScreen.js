@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, TouchableOpacity } from 'react-native';
 import * as SecureStore from 'expo-secure-store'
 import Testimonial from './Testimonial'
 
@@ -49,7 +49,9 @@ export default class TestimonialScreen extends Component {
             style={styles.list}
             data={this.state.testimonials} 
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <Testimonial deleteMessage={this.deleteMessage} key={item.id} item={item} />} 
+            renderItem={({ item }) => <Testimonial fetchData={this.fetchData} token={this.props.token} deleteMessage={this.deleteMessage} key={item.id} item={item} />}
+            onRefresh={this.fetchData}
+            refreshing={false} 
         />
       </View>
     );
